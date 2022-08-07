@@ -26,4 +26,6 @@ router.post(
   categoryControllers.createCategory
 );
 
+router.get('/all-category',categoryControllers.getCategory)
+
 module.exports = router;

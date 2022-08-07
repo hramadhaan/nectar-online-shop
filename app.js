@@ -42,7 +42,7 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.cwoohll.mongodb.net/?retryWrites=true&w=majority`
   )
-  .then((result) => {
+  .then(() => {
     app.listen(8000);
   })
   .catch((err) => {

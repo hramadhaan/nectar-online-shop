@@ -25,4 +25,6 @@ router.post(
 
 router.get("/search-product", productControllers.searchProduct);
 
+router.get("/all-products", productControllers.allProducts);
+
 module.exports = router;

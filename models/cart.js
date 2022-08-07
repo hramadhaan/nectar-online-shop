@@ -3,19 +3,19 @@ const Schema = mongoose.Schema;
 
 const cartSchema = new Schema(
   {
-    address: {
-      type: Schema.Types.ObjectId,
-      required: false,
-    },
-    items: [{ type: Schema.Types.ObjectId, required: false, ref: "product" }],
-    qty: {
-      type: Schema.Types.Array,
-      required: false,
-    },
+    items: [{ type: Schema.Types.ObjectId, ref: "itemCart" }],
     userId: {
       type: Schema.Types.ObjectId,
       required: true,
-      ref: "auth",
+      ref: "authentication",
+    },
+    totalItems: {
+      type: Schema.Types.Number,
+      default: 0,
+    },
+    total: {
+      type: Schema.Types.Number,
+      default: 0,
     },
   },
   { timestamps: true }

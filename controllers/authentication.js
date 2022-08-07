@@ -1,5 +1,5 @@
 const Auth = require("../models/authentication");
-const Cart = require('../models/cart')
+const Cart = require("../models/cart");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
@@ -95,6 +95,40 @@ exports.login = (req, res, next) => {
         token: token,
         data: dataUser,
       });
+    })
+    .catch((err) => {
+      if (!res.statusCode) {
+        err.statusCode = 422;
+      }
+      next(err);
+    });
+};
+
+exports.profile = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error("Validation Failed.");
+    error.statusCode = 422;
+    error.data = errors.array();
+    throw error;
+  }
+
+  const userId = req.userId;
+
+  Auth.findById(userId)
+    .then((result) => {
+      if (!result) {
+        res.status(403).json({
+          success: false,
+          message: "Akun-mu tidak terdaftar",
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: 'Berhasil mendapatkan data Anda',
+          data: result
+        })
+      }
     })
     .catch((err) => {
       if (!res.statusCode) {

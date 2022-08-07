@@ -30,7 +30,31 @@ exports.createCategory = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log("Hanif", err);
+      if (!res.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+};
+
+exports.getCategory = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error("Validation Failed.");
+    error.statusCode = 422;
+    error.data = errors.array();
+    throw error;
+  }
+
+  Category.find()
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: 'Berhasil mendapatkan kategori',
+        data: result
+      })
+    })
+    .catch((err) => {
       if (!res.statusCode) {
         err.statusCode = 500;
       }

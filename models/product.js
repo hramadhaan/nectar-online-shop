@@ -7,8 +7,8 @@ const productSchema = new Schema({
     required: true,
   },
   qtyStock: {
-    type: Schema.Types.Number,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: "stock",
   },
   categoryId: {
     type: Schema.Types.ObjectId,
@@ -24,7 +24,7 @@ const productSchema = new Schema({
     required: true,
   },
   productPrice: {
-    type: Schema.Types.String,
+    type: Schema.Types.Number,
     required: true,
   },
   productImage: {

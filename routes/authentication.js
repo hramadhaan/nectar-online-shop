@@ -6,6 +6,7 @@ const fs = require("fs");
 const Auth = require("../models/authentication");
 
 const authControllers = require("../controllers/authentication");
+const isAuth = require("../middleware/authentication");
 
 const router = express.Router();
 
@@ -59,5 +60,7 @@ router.post(
   ],
   authControllers.login
 );
+
+router.get("/profile", isAuth, authControllers.profile);
 
 module.exports = router;
