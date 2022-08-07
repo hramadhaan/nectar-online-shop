@@ -1,4 +1,5 @@
 const express = require("express");
+const PORT = process.env.PORT || 8000
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -43,7 +44,7 @@ mongoose
     `mongodb+srv://${process.env.USERNAME}:${process.env.PASSWORD}@cluster0.cwoohll.mongodb.net/?retryWrites=true&w=majority`
   )
   .then(() => {
-    app.listen(8000);
+    app.listen(PORT);
   })
   .catch((err) => {
     console.log("mongoose: ", err);
